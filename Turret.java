@@ -4,6 +4,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Turret extends SuperSmoothMover
 {
     GreenfootImage turret = new GreenfootImage("images/turret.png");
+    private long lastShotTime = 0;
+    private long cooldown = 2000;
     
     public Turret()
     {
@@ -14,8 +16,9 @@ public class Turret extends SuperSmoothMover
     
     public void act()
     {
-        if (Greenfoot.isKeyDown("space")) {
+        if (System.currentTimeMillis() - lastShotTime >= cooldown) {
             shoot();
+            lastShotTime = System.currentTimeMillis();
         }
     }
     
